@@ -13,12 +13,15 @@ var routes = require('./routes/index.js');
 // *** express instance *** //
 var app = express();
 
+// *** config file *** //
+var config = require('./_config');
+
 // *** mongoose *** ///
-mongoose.connect('mongodb://localhost/node-testing', function(err, res) {
+mongoose.connect(config.mongoURI[app.settings.env], function(err, res) {
   if(err) {
     console.log('Error connecting to the database. ' + err);
   } else {
-    console.log('Connected to Database!');
+    console.log('Connected to Database: ' + config.mongoURI[app.settings.env]);
   }
 });
 
@@ -38,4 +41,5 @@ server.listen(1337, function() {
   console.log("Node server running on http://localhost:1337");
 });
 
+module.exports = app;
 module.exports = app;
